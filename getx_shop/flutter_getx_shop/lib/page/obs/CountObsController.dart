@@ -9,12 +9,18 @@ import 'package:get/get.dart';
 ///
 /// 代码清单
 ///代码清单
+///
+///
 class CountObsController extends GetxController {
+
+  //声明为被观察者
   RxInt _count = 0.obs;
 
   RxInt get getCount => _count;
 
+  //操作方法
   void addCount() {
     _count++;
   }
+
 }

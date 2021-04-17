@@ -13,12 +13,7 @@ import 'CountObsController.dart';
 /// 可关注博客：https://blog.csdn.net/zl18603543572
 ///
 /// Gex 响应编程
-class CountObsMainPage extends StatefulWidget {
-  @override
-  _CountObsMainPageState createState() => _CountObsMainPageState();
-}
-
-class _CountObsMainPageState extends State<CountObsMainPage> {
+class CountObsMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +29,18 @@ class _CountObsMainPageState extends State<CountObsMainPage> {
           height: double.infinity,
           child: Column(
             children: [
+
+              //显示数据方式一
+              GetBuilder<CountObsController>(
+                //初始化控制器
+                init: CountObsController(),
+                //监听回调
+                builder: (CountObsController controller) {
+                  return Text("当前 count 的值为 ${controller.getCount}");
+                },
+              ),
+
+              //显示数据方式二
               GetX<CountObsController>(
                 //初始化控制器
                 init: CountObsController(),
@@ -42,12 +49,17 @@ class _CountObsMainPageState extends State<CountObsMainPage> {
                   return Text("当前 count 的值为 ${controller.getCount}");
                 },
               ),
+
+              //显示数据方式三
+              //观察者自动更新
               Obx(() {
                 return Text(
                     "Obx 当前 count 的值为 ${Get.find<CountObsController>().getCount}");
               }),
+
             ],
           )),
+      //点击按钮修改值
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
